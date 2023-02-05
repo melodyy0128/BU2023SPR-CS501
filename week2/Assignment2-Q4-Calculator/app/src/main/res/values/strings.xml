@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="instructions">Please input/select the following:</string>
+    <string name="add_radio">+ (Add)</string>
+    <string name="subtract_radio">- (Subtract)</string>
+    <string name="multiply_radio">* (Multiply)</string>
+    <string name="divide_radio">/ (Divide)</string>
+    <string name="modulo_radio">% (Modulo)</string>
+    <string name="calculate_button">CALCULATE</string>
+    <string name="operand1_hint">Operand 1</string>
+    <string name="operand2_hint">Operand 2</string>
+    <string name="divide_by_0_error_toast">Division by 0 is not allowed!</string>
+    <string name="operand1_missing_error_toast">Please provide operand 1</string>
+    <string name="operand2_missing_error_toast">Please provide operand 2</string>
+</resources>
