@@ -9,7 +9,9 @@
     <string name="calculate_button">CALCULATE</string>
     <string name="operand1_hint">Operand 1</string>
     <string name="operand2_hint">Operand 2</string>
-    <string name="divide_by_0_error_toast">Division by 0 is not allowed!</string>
-    <string name="operand1_missing_error_toast">Please provide operand 1</string>
-    <string name="operand2_missing_error_toast">Please provide operand 2</string>
+    <string name="divide_or_modulo_by_0_error">Division or Modulo by 0 is not allowed!</string>
+    <string name="operand1_missing_error">Please provide operand 1</string>
+    <string name="operand2_missing_error">Please provide operand 2</string>
+    <string name="ok">ok</string>
+    <string name="zero_result">0.0</string>
 </resources>
