@@ -9,9 +9,6 @@ import com.assignment2.q4.calculator.databinding.ActivityMainBinding
 
 
 private const val TAG = "MainActivity"
-private const val OPERAND1 = "com.assignment2.q4.calculator.operand_1"
-private const val OPERATION = "com.assignment2.q4.calculator.operation"
-private const val OPERAND2 = "com.assignment2.q4.calculator.operand_2"
 private const val RESULT = "com.assignment2.q4.calculator.result"
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +24,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState != null) {
-            val op1 = findViewById<EditText>(R.id.operand1_number)
-            op1.setText(savedInstanceState.getString(OPERAND1, "") ?: "", TextView.BufferType.EDITABLE)
-
-            val op2 = findViewById<EditText>(R.id.operand2_number)
-            op2.setText(savedInstanceState.getString(OPERAND2, "") ?: "", TextView.BufferType.EDITABLE)
-
             binding.resultView.text = savedInstanceState.getString(RESULT, "") ?: ""
         }
 
@@ -88,9 +79,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(OPERAND1, operand1)
-//        outState.putString(OPERATION, operation)
-        outState.putString(OPERAND2, operand2)
         outState.putString(RESULT, messageResId)
     }
 }
