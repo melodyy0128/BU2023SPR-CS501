@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.assignment2.q4.calculator.databinding.ActivityMainBinding
 
@@ -13,6 +14,7 @@ private const val RESULT = "com.assignment2.q4.calculator.result"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val calcViewModel: CalcViewModel by viewModels()
     private var operand1 = ""
     private var operation = ""
     private var operand2 = ""
@@ -22,10 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        messageResId = calcViewModel.currentRes
+        updateOutput()
 
-        if (savedInstanceState != null) {
-            binding.resultView.text = savedInstanceState.getString(RESULT, "") ?: ""
-        }
+        Log.d(TAG, "Got a CalcViewModel: $calcViewModel")
+
+//        if (savedInstanceState != null) {
+//            binding.resultView.text = savedInstanceState.getString(RESULT, "") ?: ""
+//        }
 
         binding.calculateButton.setOnClickListener {
             val operand1Input = findViewById<EditText>(R.id.operand1_number)
@@ -57,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.resultView.text = messageResId
+        calcViewModel.updateRes(messageResId)
     }
 
 
@@ -77,8 +84,12 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(RESULT, messageResId)
+    private fun updateOutput() {
+        binding.resultView.text = messageResId
     }
+
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putString(RESULT, messageResId)
+//    }
 }
