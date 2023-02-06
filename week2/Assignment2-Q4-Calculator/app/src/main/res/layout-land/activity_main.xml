@@ -42,38 +42,38 @@
         android:orientation="horizontal">
         <RadioGroup
             android:id="@+id/operations_radio_group"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/add_radio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/add_radio" />
 
             <RadioButton
                 android:id="@+id/subtract_radio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/subtract_radio" />
 
             <RadioButton
                 android:id="@+id/multiply_radio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/multiply_radio" />
 
             <RadioButton
                 android:id="@+id/divide_radio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/divide_radio" />
 
             <RadioButton
                 android:id="@+id/modulo_radio"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/modulo_radio" />
         </RadioGroup>
