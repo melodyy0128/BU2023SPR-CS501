@@ -9,93 +9,78 @@
     tools:context=".MainActivity">
 
 
-    <TextView
+<TextView
         android:id="@+id/celsiusText"
-        android:layout_width="907dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:gravity="start"
-        android:padding="20dp"
         android:text="@string/celsius"
         android:textSize="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/celsiusBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <SeekBar
-        android:id="@+id/celsiusBar"
-        android:layout_width="817dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="120dp"
-        android:max="100"
-        android:min="0"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintBottom_toTopOf="@id/celsiusValue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <SeekBar
+        android:id="@+id/celsiusBar"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:max="100"
+        android:min="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/celsiusText"></SeekBar>
+
     <TextView
         android:id="@+id/celsiusValue"
-        android:layout_width="873dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:gravity="end"
-        android:padding="20dp"
+        android:layout_marginEnd="20dp"
         android:text="0.00"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@id/fahrenheitText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/celsiusBar" />
 
     <TextView
         android:id="@+id/fahrenheitText"
-        android:layout_width="870dp"
-        android:layout_height="85dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:gravity="start"
-        android:padding="20dp"
         android:text="Fahrenheit"
         android:textSize="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/fahrenheitBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/celsiusValue" />
 
     <SeekBar
         android:id="@+id/fahrenheitBar"
-        android:layout_width="827dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
         android:max="212"
         android:min="0"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:progress="32"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fahrenheitText" />
 
     <TextView
         android:id="@+id/fahrenheitValue"
-        android:layout_width="897dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:gravity="end"
-        android:padding="20dp"
         android:text="32.00"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fahrenheitBar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/fahrenheitBar" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
