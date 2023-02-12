@@ -10,33 +10,35 @@ import com.bignerdranch.android.geoquiz.databinding.ActivityCheatBinding
 
 const val EXTRA_ANSWER_SHOWN = "com.bignerdranch.android.geoquiz.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE = "com.bignerdranch.android.geoquiz.answer_is_true"
+private const val CHEATED = "com.bignerdranch.android.geoquiz.cheated"
 
 class CheatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheatBinding
-    private val cheatViewModel: CheatViewModel by viewModels()
     private var cheated = false
 
     private var answerIsTrue = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_cheat)
         binding = ActivityCheatBinding.inflate(layoutInflater)
         setContentView(binding.root)
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
 
-        cheated = cheatViewModel.didCheat
+        cheated = savedInstanceState?.getBoolean(CHEATED, false) ?: false
+
         if (cheated) {
             updateOutput()
             setAnswerShownResult(true)
         }
 
         binding.showAnswerButton.setOnClickListener {
+            cheated = true
             updateOutput()
-            cheatViewModel.cheat()
             setAnswerShownResult(true)
         }
+
+        updateOutput()
     }
 
     private fun setAnswerShownResult(isAnswerShown: Boolean) {
@@ -54,10 +56,12 @@ class CheatActivity : AppCompatActivity() {
     }
 
     private fun updateOutput() {
-        val answerText = when {
-            answerIsTrue -> R.string.true_button
-            else -> R.string.false_button
+        if (cheated) {
+            val answerText = when {
+                answerIsTrue -> R.string.true_button
+                else -> R.string.false_button
+            }
+            binding.answerTextView.setText(answerText)
         }
-        binding.answerTextView.setText(answerText)
     }
 }
