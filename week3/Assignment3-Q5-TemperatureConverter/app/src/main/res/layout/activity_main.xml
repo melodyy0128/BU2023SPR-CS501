@@ -57,7 +57,6 @@
         android:id="@+id/fahrenheitText"
         android:layout_width="334dp"
         android:layout_height="93dp"
-        android:layout_marginEnd="76dp"
         android:layout_marginBottom="321dp"
         android:gravity="start"
         android:padding="25dp"
@@ -65,8 +64,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/celsiusText"
-        app:layout_constraintVertical_bias="0.717" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <SeekBar
         android:id="@+id/fahrenheitBar"
