@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     val df = DecimalFormat("#.##")
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -83,6 +85,11 @@ class MainActivity : AppCompatActivity() {
         // round to 2 decimal places
 //        df.roundingMode = RoundingMode
         currentF = df.format(currentF).toDouble()
+    }
+
+    fun getFahrenheit() : Double {
+        CtoF()
+        return currentF
     }
 
     private fun FtoC() {
