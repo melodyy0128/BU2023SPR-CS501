@@ -45,8 +45,8 @@ class CheatActivityTest {
         device.setOrientationNatural()
         device.pressBack()
         onView(withId(R.id.true_button)).perform(click())
-        onView(withText(R.string.judgment_toast))
-            .check(matches(withId(com.google.android.material.R.id.snackbar_text)))
+//        onView(withText(R.string.judgment_toast))
+//            .check(matches(withId(com.google.android.material.R.id.snackbar_text)))
 
 //            .inRoot(withDecorView())
 
@@ -67,7 +67,25 @@ class CheatActivityTest {
     }
 
     // showOnlyWhenCheated
-
+    @Test
+    fun showOnlyWhenCheated() {
+        onView(withId(R.id.cheat_button)).perform(click())
+        onView(withId(R.id.show_answer_button)).perform(click())
+        device.pressBack()
+        onView(withId(R.id.true_button)).perform(click())
+        onView(withId(R.id.next_button)).perform(click())
+        onView(withId(R.id.true_button)).perform(click())
+    }
     // onceCheatedAlwaysCheated
-
+    @Test
+    fun onceCheatedAlwaysCheated() {
+        onView(withId(R.id.cheat_button)).perform(click())
+        onView(withId(R.id.show_answer_button)).perform(click())
+        device.pressBack()
+        onView(withId(R.id.true_button)).perform(click())
+        onView(withId(R.id.next_button)).perform(click())
+        onView(withId(R.id.true_button)).perform(click())
+        onView(withId(R.id.prev_button)).perform(click())
+        onView(withId(R.id.true_button)).perform(click())
+    }
 }

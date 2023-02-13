@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.SavedStateHandle
 import com.bignerdranch.android.geoquiz.databinding.ActivityCheatBinding
 
 const val EXTRA_ANSWER_SHOWN = "com.bignerdranch.android.geoquiz.answer_shown"
@@ -15,7 +16,7 @@ private const val CHEATED = "com.bignerdranch.android.geoquiz.cheated"
 class CheatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheatBinding
-    private var cheated = false
+    var cheated = false
 
     private var answerIsTrue = false
 
