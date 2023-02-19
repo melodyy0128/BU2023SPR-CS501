@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".letterFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/chooseLetter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/choose_a_letter"
+        android:textSize="30sp"/>
+<!--        app:layout_constraintTop_toBottomOf="@+id/hangman" />-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/letterLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+    <Button
+        android:id="@+id/a_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/a_text"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/b_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/b_text"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/c_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/c_text"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/d_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/d_text"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/e_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/e_text"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/f_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/f_text"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/g_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/g_text"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/h_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/h_text"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/i_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/i_text"
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/j_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/j_text"
+        tools:layout_editor_absoluteX="380dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/k_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/k_text"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/l_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/l_text"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/m_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/m_text"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/n_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/n_text"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/o_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/o_text"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/p_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/p_text"
+        tools:layout_editor_absoluteX="216dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/q_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/q_text"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/r_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/r_text"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/s_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/s_text"
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/t_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/t_text"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/u_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/u_text"
+        tools:layout_editor_absoluteX="380dp"
+        tools:layout_editor_absoluteY="491dp" />
+
+    <Button
+        android:id="@+id/v_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/v_text"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <Button
+        android:id="@+id/w_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/w_text"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <Button
+        android:id="@+id/x_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/x_text"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <Button
+        android:id="@+id/y_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/y_text"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <Button
+        android:id="@+id/z_button"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/z_text"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+</FrameLayout>
