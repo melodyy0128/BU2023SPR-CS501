@@ -2,10 +2,11 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KeyboardInterface {
 
     private var _binding: ActivityMainBinding? = null
     private val binding
@@ -24,5 +25,9 @@ class MainActivity : AppCompatActivity() {
         val fm: FragmentManager = supportFragmentManager
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
         fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
+    }
+
+    override fun keyboardInterface(data: String) {
+        Log.d("LOG", "$data clicked")
     }
 }
