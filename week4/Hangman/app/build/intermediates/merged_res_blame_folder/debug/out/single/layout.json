@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.example.myapplication.app-mergeDebugResources-33:/layout/activity_main.xml",
+        "source": "com.example.myapplication.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.myapplication.app-mergeDebugResources-33:/layout/fragment_keyboard.xml",
+        "source": "com.example.myapplication.app-main-36:/layout/fragment_keyboard.xml"
+    },
+    {
+        "merged": "com.example.myapplication.app-mergeDebugResources-33:/layout/fragment_hangman.xml",
+        "source": "com.example.myapplication.app-main-36:/layout/fragment_hangman.xml"
+    }
+]
