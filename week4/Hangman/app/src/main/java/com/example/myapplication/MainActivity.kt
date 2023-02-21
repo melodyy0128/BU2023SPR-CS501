@@ -9,6 +9,7 @@ import com.example.myapplication.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), KeyboardInterface {
 
     private var _binding: ActivityMainBinding? = null
+    private val fm: FragmentManager = supportFragmentManager
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
@@ -21,13 +22,17 @@ class MainActivity : AppCompatActivity(), KeyboardInterface {
         val hangmanFragment = HangmanFragment()
         val keyboardFragment = KeyboardFragment()
 
-
-        val fm: FragmentManager = supportFragmentManager
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
         fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
+
     }
 
     override fun keyboardInterface(data: String) {
         Log.d("LOG", "$data clicked")
+        val hangmanFragment = HangmanFragment()
+        val bundle = Bundle()
+        bundle.putString("letter", data)
+        hangmanFragment.arguments = bundle
+        fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
     }
 }
