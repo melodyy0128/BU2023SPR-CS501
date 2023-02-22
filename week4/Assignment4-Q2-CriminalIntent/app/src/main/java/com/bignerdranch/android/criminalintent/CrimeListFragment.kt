@@ -38,18 +38,9 @@ class CrimeListFragment : Fragment() {
 
         val crimes = crimeListViewModel.crimes
         val adapter = CrimeListAdapter(crimes)
-        val adapters=SeriousCrimeListAdapter(crimes)
-        for (i in 0 until 100) {
-            val viewType = adapter.getItemViewType(i)
-            if (viewType==1) {
-                binding.crimeRecyclerView.adapter = adapter
-            }else{
-                binding.crimeRecyclerView.adapter=adapters
-            }
+        binding.crimeRecyclerView.adapter = adapter
 
-        }
         return binding.root
-
     }
 
     override fun onDestroyView() {
