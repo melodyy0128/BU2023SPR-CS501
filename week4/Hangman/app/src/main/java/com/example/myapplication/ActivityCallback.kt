@@ -1,5 +1,5 @@
 package com.example.myapplication
 
-interface KeyboardInterface {
+interface ActivityCallback {
     fun keyboardInterface(data: String)
 }

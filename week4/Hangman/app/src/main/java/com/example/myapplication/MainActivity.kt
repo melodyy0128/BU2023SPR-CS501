@@ -6,9 +6,12 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), KeyboardInterface {
+class MainActivity : AppCompatActivity(), ActivityCallback {
 
     private var _binding: ActivityMainBinding? = null
+
+    private lateinit var hfcallback:HangmanCallback
+
     private val fm: FragmentManager = supportFragmentManager
     private val binding
         get() = checkNotNull(_binding) {
@@ -24,8 +27,10 @@ class MainActivity : AppCompatActivity(), KeyboardInterface {
 
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
         fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
-
+        hfcallback = fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
+        hfcallback.updateImage()
     }
+
 
     override fun keyboardInterface(data: String) {
         Log.d("LOG", "$data clicked")

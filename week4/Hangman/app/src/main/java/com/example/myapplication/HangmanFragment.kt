@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class HangmanFragment : Fragment() {
+class HangmanFragment : Fragment(), HangmanCallback {
 
     companion object {
         fun newInstance() = HangmanFragment()
@@ -26,6 +26,10 @@ class HangmanFragment : Fragment() {
             Log.d("TAG", "$message received")
         }
         return inflater.inflate(R.layout.fragment_hangman, container, false)
+    }
+
+    override fun updateImage(message: String) {
+        Log.d(this.tag,"update images")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

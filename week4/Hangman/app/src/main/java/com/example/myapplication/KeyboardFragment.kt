@@ -1,15 +1,12 @@
 package com.example.myapplication
 
 import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.content.ContextCompat
 import com.example.myapplication.databinding.FragmentKeyboardBinding
 
 class KeyboardFragment : Fragment() {
@@ -18,7 +15,7 @@ class KeyboardFragment : Fragment() {
         fun newInstance() = KeyboardFragment()
     }
 
-    lateinit var dataPasser: KeyboardInterface
+    lateinit var dataPasser: ActivityCallback
 
     private lateinit var viewModel: KeyboardViewModel
 
@@ -30,7 +27,7 @@ class KeyboardFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        dataPasser = context as KeyboardInterface
+        dataPasser = context as ActivityCallback
     }
 
     fun passData(data: String){
