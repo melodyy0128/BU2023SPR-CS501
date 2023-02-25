@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TableRow
+import android.widget.Toast
+import androidx.core.view.get
 import com.example.myapplication.Interfaces.ActivityCallback
 import com.example.myapplication.Interfaces.KeyboardFragmentCallback
 import com.example.myapplication.ViewModel.KeyboardViewModel
@@ -22,7 +26,7 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
     private lateinit var viewModel: KeyboardViewModel
 
-    private var _binding: FragmentKeyboardBinding? = null
+    private lateinit var _binding: FragmentKeyboardBinding
     private val binding
         get() = checkNotNull(_binding) {
             "Cannot access binding because it is null. Is the view visible?"
@@ -42,115 +46,28 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentKeyboardBinding.inflate(inflater, container, false)
-        binding.a.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.a)
-            passData(getString(R.string.a)) })
-
-        binding.b.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.b)
-            passData("B")})
-
-        binding.c.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.c)
-            passData("C")})
-
-        binding.d.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.d)
-            passData("D")})
-
-        binding.e.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.e)
-            passData("E")})
-
-        binding.f.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.f)
-            passData("F")})
-
-        binding.g.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.g)
-            passData("G")})
-
-        binding.h.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.h)
-            passData("H")})
-
-        binding.i.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.i)
-            passData("I")})
-
-        binding.j.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.j)
-            passData("J")})
-
-        binding.k.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.k)
-            passData("K")})
-
-        binding.l.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.l)
-            passData("L")})
-
-        binding.m.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.m)
-            passData("M")})
-
-        binding.n.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.n)
-            passData("N")})
-
-        binding.o.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.o)
-            passData("O")})
-
-        binding.p.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.p)
-            passData("P")})
-
-        binding.q.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.q)
-            passData("Q")})
-
-        binding.r.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.r)
-            passData("R")})
-
-        binding.s.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.s)
-            passData("S")})
-
-        binding.t.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.t)
-            passData("T")})
-
-        binding.u.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.u)
-            passData("U")})
-
-        binding.v.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.v)
-            passData("V")})
-
-        binding.w.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.w)
-            passData("W")})
-
-        binding.x.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.x)
-            passData("X")})
-
-        binding.y.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.y)
-            passData("Y")})
-
-        binding.z.setOnClickListener( View.OnClickListener {
-            viewModel.letterClicked(binding.z)
-            passData("Z")})
-
+        setButtonListeners()
 //        val intent = Intent(this.context, MainActivity::class.java)
 //        intent.putExtra("letter", letter.text.toString())
 //        ContextCompat.startActivity(intent)
 
         return binding.root
+    }
+
+    fun setButtonListeners(){
+        for(i in 0 until  binding.letterContainer.childCount)
+        {
+            val view = binding.letterContainer.getChildAt(i) as TableRow
+            for(j in 0 until view.childCount)
+            {
+                var button=view.get(j) as Button
+                button.setOnClickListener {
+                    binding.z.setOnClickListener( View.OnClickListener {
+                        viewModel.letterClicked(button)
+                        passData(button.text.toString())})
+                }
+            }
+        }
     }
 
 
@@ -162,7 +79,16 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     }
 
     override fun resetButtonAvailability() {
-
+        for(i in 0 until  binding.letterContainer.childCount)
+        {
+            val view = binding.letterContainer.getChildAt(i) as TableRow
+            for(j in 0 until view.childCount)
+            {
+                var button=view.get(j) as Button
+                button.isClickable=true
+                button.isEnabled=true
+            }
+        }
     }
 
 }
