@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
         fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
-        hfcallback = fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
-        hfcallback.updateImage()
     }
 
 
