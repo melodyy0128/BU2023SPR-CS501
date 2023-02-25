@@ -18,10 +18,6 @@ import com.example.myapplication.databinding.FragmentKeyboardBinding
 
 class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
-    companion object {
-        fun newInstance() = KeyboardFragment()
-    }
-
     lateinit var dataPasser: ActivityCallback
 
     private lateinit var viewModel: KeyboardViewModel
@@ -54,7 +50,7 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
         return binding.root
     }
 
-    fun setButtonListeners(){
+    private fun setButtonListeners(){
         for(i in 0 until  binding.letterContainer.childCount)
         {
             val view = binding.letterContainer.getChildAt(i) as TableRow
@@ -84,11 +80,15 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
             val view = binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount)
             {
-                var button=view.get(j) as Button
+                var button=view[j] as Button
                 button.isClickable=true
                 button.isEnabled=true
             }
         }
+    }
+
+    companion object {
+        fun newInstance() = KeyboardFragment()
     }
 
 }
