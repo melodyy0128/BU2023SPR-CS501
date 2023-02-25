@@ -58,9 +58,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
             {
                 var button=view.get(j) as Button
                 button.setOnClickListener {
-                    binding.z.setOnClickListener( View.OnClickListener {
-                        viewModel.letterClicked(button)
-                        passData(button.text.toString())})
+                    button.isEnabled=false
+                    button.isClickable=false
                 }
             }
         }
@@ -71,9 +70,12 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(KeyboardViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
+
+    /**
+     * call this function if you want to enable all buttons
+     */
     override fun resetButtonAvailability() {
         for(i in 0 until  binding.letterContainer.childCount)
         {

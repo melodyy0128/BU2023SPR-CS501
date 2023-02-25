@@ -10,10 +10,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.myapplication.Interfaces.HangmanCallback
 import com.example.myapplication.ViewModel.HangmanViewModel
+import com.example.myapplication.databinding.FragmentHangmanBinding
 
 class HangmanFragment : Fragment(), HangmanCallback {
 
-    private lateinit var hangmanImage : ImageView
+    private lateinit var binding: FragmentHangmanBinding
 
     private lateinit var model:HangmanViewModel
     companion object {
@@ -31,15 +32,15 @@ class HangmanFragment : Fragment(), HangmanCallback {
             val message = bundle!!.getString("letter")
             Log.d("TAG", "$message received")
         }
-        return inflater.inflate(R.layout.fragment_hangman, container, false)
+        binding= FragmentHangmanBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun updateImage() {
         model.image_number+=1
         var image_number=model.image_number
-
         Log.d(this.tag,"update images $image_number")
-        hangmanImage = view!!.findViewById(R.id.hangmanImage)
+        var hangmanImage = binding.hangmanImage
         when (image_number) {
             0 -> hangmanImage.setImageResource(R.drawable.h0)
             1 -> hangmanImage.setImageResource(R.drawable.h1)
@@ -52,6 +53,14 @@ class HangmanFragment : Fragment(), HangmanCallback {
             8 -> hangmanImage.setImageResource(R.drawable.h8)
             9 -> hangmanImage.setImageResource(R.drawable.h9)
         }
+    }
+
+    override fun setCorrectCharacterAt(index: Int, char: Char) {
+        var wordLineText = binding.wordLine.text.toString()
+        var resultText:StringBuffer= StringBuffer(wordLineText)
+        resultText.setCharAt(index/2,char)
+        // Because the text of word line is some string
+        // of one underscore followed by another sapce
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
