@@ -1,7 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.ViewModel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.R
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 

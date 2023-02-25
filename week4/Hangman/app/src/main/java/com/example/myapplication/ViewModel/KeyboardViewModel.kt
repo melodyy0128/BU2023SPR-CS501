@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ViewModel
 
 import android.content.Intent
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ViewModel
 
 import androidx.annotation.StringRes
 

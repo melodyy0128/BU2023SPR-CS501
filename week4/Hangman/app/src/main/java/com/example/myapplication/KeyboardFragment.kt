@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.myapplication.Interfaces.ActivityCallback
+import com.example.myapplication.Interfaces.KeyboardFragmentCallback
+import com.example.myapplication.ViewModel.KeyboardViewModel
 import com.example.myapplication.databinding.FragmentKeyboardBinding
 
-class KeyboardFragment : Fragment() {
+class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
     companion object {
         fun newInstance() = KeyboardFragment()
@@ -31,7 +34,7 @@ class KeyboardFragment : Fragment() {
     }
 
     fun passData(data: String){
-        dataPasser.keyboardInterface(data)
+        dataPasser.sendCharMessage(data)
     }
 
     override fun onCreateView(
@@ -150,10 +153,16 @@ class KeyboardFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(KeyboardViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun resetButtonAvailability() {
+
     }
 
 }

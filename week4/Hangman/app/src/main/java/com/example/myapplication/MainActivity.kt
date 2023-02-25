@@ -6,6 +6,9 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.databinding.ActivityMainBinding
 import androidx.activity.viewModels
+import com.example.myapplication.Interfaces.ActivityCallback
+import com.example.myapplication.Interfaces.HangmanCallback
+import com.example.myapplication.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), ActivityCallback {
 
@@ -15,7 +18,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     private var _binding: ActivityMainBinding? = null
 
-    private lateinit var hfcallback:HangmanCallback
+    private lateinit var hfcallback: HangmanCallback
 
     private val fm: FragmentManager = supportFragmentManager
 
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     }
 
 
-    override fun keyboardInterface(data: String) {
+    override fun sendCharMessage(data: String) {
         Log.d("LOG", "$data clicked")
         checkInput(data)
     }
@@ -49,6 +52,11 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         bundle.putInt("image_number", kill)
         hangmanFragment.arguments = bundle
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
+    }
+
+    private fun hangmanChangeImage(){
+        var hangman=fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
+        hangman.updateImage()
     }
 
 }

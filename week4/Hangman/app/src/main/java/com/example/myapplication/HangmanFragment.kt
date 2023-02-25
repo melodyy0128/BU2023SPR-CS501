@@ -8,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.example.myapplication.Interfaces.HangmanCallback
+import com.example.myapplication.ViewModel.HangmanViewModel
 
 class HangmanFragment : Fragment(), HangmanCallback {
 
     private lateinit var hangmanImage : ImageView
+
+    private lateinit var model:HangmanViewModel
     companion object {
         fun newInstance() = HangmanFragment()
     }
@@ -30,7 +34,10 @@ class HangmanFragment : Fragment(), HangmanCallback {
         return inflater.inflate(R.layout.fragment_hangman, container, false)
     }
 
-    override fun updateImage(image_number:Int) {
+    override fun updateImage() {
+        model.image_number+=1
+        var image_number=model.image_number
+
         Log.d(this.tag,"update images $image_number")
         hangmanImage = view!!.findViewById(R.id.hangmanImage)
         when (image_number) {
