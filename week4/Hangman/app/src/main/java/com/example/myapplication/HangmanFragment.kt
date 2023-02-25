@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 
 class HangmanFragment : Fragment(), HangmanCallback {
 
+    private lateinit var hangmanImage : ImageView
     companion object {
         fun newInstance() = HangmanFragment()
     }
@@ -28,8 +30,21 @@ class HangmanFragment : Fragment(), HangmanCallback {
         return inflater.inflate(R.layout.fragment_hangman, container, false)
     }
 
-    override fun updateImage(message: String) {
-        Log.d(this.tag,"update images")
+    override fun updateImage(image_number:Int) {
+        Log.d(this.tag,"update images $image_number")
+        hangmanImage = view!!.findViewById(R.id.hangmanImage)
+        when (image_number) {
+            0 -> hangmanImage.setImageResource(R.drawable.h0)
+            1 -> hangmanImage.setImageResource(R.drawable.h1)
+            2 -> hangmanImage.setImageResource(R.drawable.h2)
+            3 -> hangmanImage.setImageResource(R.drawable.h3)
+            4 -> hangmanImage.setImageResource(R.drawable.h4)
+            5 -> hangmanImage.setImageResource(R.drawable.h5)
+            6 -> hangmanImage.setImageResource(R.drawable.h6)
+            7 -> hangmanImage.setImageResource(R.drawable.h7)
+            8 -> hangmanImage.setImageResource(R.drawable.h8)
+            9 -> hangmanImage.setImageResource(R.drawable.h9)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

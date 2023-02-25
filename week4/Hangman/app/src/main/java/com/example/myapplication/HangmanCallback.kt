@@ -1,5 +1,5 @@
 package com.example.myapplication
 
 interface HangmanCallback {
-    fun updateImage(message:String)
+    fun updateImage(image_number:Int)
 }
