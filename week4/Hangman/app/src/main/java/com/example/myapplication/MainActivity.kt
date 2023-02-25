@@ -8,6 +8,7 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import com.example.myapplication.Interfaces.ActivityCallback
 import com.example.myapplication.Interfaces.HangmanCallback
+import com.example.myapplication.Interfaces.KeyboardFragmentCallback
 import com.example.myapplication.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), ActivityCallback {
@@ -16,32 +17,41 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     private val wordViewModel: WordViewModel by viewModels()
 
-    private var _binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
 
-    private lateinit var hfcallback: HangmanCallback
+    private lateinit var hangmanCallback: HangmanCallback
+
+    private lateinit var keyboardFragmentCallback: KeyboardFragmentCallback
 
     private val fm: FragmentManager = supportFragmentManager
 
-    private val binding
-        get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visible?"
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding= ActivityMainBinding.inflate(layoutInflater);
+        setContentView(binding.root)
+//        val hangmanFragment = HangmanFragment()
+//        val keyboardFragment = KeyboardFragment()
+//
+//        fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
+//        fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
 
-        val hangmanFragment = HangmanFragment()
-        val keyboardFragment = KeyboardFragment()
+    }
 
-        fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
-        fm.beginTransaction().replace(R.id.fragment_keyboard, keyboardFragment).commit()
+    private fun getCallBackInterfaces()
+    {
+//        if(hangmanCallback==null)
+            hangmanCallback=fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
+//        if(keyboardFragmentCallback==null)
+            keyboardFragmentCallback=fm.findFragmentById(R.id.fragment_keyboard) as KeyboardFragmentCallback
     }
 
 
     override fun sendCharMessage(data: String) {
         Log.d("LOG", "$data clicked")
-        checkInput(data)
+        getCallBackInterfaces()
+        hangmanCallback.setCorrectCharacterAt(0,data[0])
+//        checkInput(data)
+
     }
     //TODO:check letter with word
     //valid user's input
@@ -55,8 +65,9 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     }
 
     private fun hangmanChangeImage(){
-        var hangman=fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
-        hangman.updateImage()
+
+        getCallBackInterfaces()
+        hangmanCallback.updateImage()
     }
 
 }

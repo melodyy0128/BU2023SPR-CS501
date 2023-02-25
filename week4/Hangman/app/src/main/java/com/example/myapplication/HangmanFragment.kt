@@ -59,6 +59,7 @@ class HangmanFragment : Fragment(), HangmanCallback {
         var wordLineText = binding.wordLine.text.toString()
         var resultText:StringBuffer= StringBuffer(wordLineText)
         resultText.setCharAt(index/2,char)
+        binding.wordLine.setText(resultText.toString())
         // Because the text of word line is some string
         // of one underscore followed by another sapce
     }

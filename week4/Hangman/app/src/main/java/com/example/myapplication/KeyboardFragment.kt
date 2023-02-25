@@ -23,10 +23,6 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     private lateinit var viewModel: KeyboardViewModel
 
     private lateinit var _binding: FragmentKeyboardBinding
-    private val binding
-        get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visible?"
-        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,19 +43,20 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 //        intent.putExtra("letter", letter.text.toString())
 //        ContextCompat.startActivity(intent)
 
-        return binding.root
+        return _binding.root
     }
 
     private fun setButtonListeners(){
-        for(i in 0 until  binding.letterContainer.childCount)
+        for(i in 0 until  _binding.letterContainer.childCount)
         {
-            val view = binding.letterContainer.getChildAt(i) as TableRow
+            val view = _binding.letterContainer[0] as TableRow
             for(j in 0 until view.childCount)
             {
                 var button=view.get(j) as Button
                 button.setOnClickListener {
                     button.isEnabled=false
                     button.isClickable=false
+                    dataPasser.sendCharMessage(button.text.toString())
                 }
             }
         }
@@ -77,9 +74,9 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
      * call this function if you want to enable all buttons
      */
     override fun resetButtonAvailability() {
-        for(i in 0 until  binding.letterContainer.childCount)
+        for(i in 0 until  _binding.letterContainer.childCount)
         {
-            val view = binding.letterContainer.getChildAt(i) as TableRow
+            val view = _binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount)
             {
                 var button=view[j] as Button
