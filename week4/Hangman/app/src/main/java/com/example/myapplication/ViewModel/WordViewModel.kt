@@ -6,6 +6,8 @@ import com.example.myapplication.R
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
+const val CURRENT_KILL = "CURRENT_KILL"
+
 class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
     private val wordList = listOf(
         Word(R.string.banana, "Fruit"),
@@ -23,6 +25,11 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     private var currentIndex: Int
         get() = savedStateHandle.get(CURRENT_INDEX_KEY) ?: rand(0, wordList.size - 1)
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
+
+
+     var currentError: Int
+        get() = savedStateHandle.get(CURRENT_KILL) ?: 0
+        set(value) = savedStateHandle.set(CURRENT_KILL, value)
 
     val currentWordText: Int
         get() = wordList[currentIndex].textResId

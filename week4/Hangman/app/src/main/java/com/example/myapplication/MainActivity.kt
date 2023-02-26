@@ -13,9 +13,9 @@ import com.example.myapplication.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), ActivityCallback {
 
-    private var kill = 0
-
     private val wordViewModel: WordViewModel by viewModels()
+
+    private var kill = wordViewModel.currentError
 
     private lateinit var binding: ActivityMainBinding
 
