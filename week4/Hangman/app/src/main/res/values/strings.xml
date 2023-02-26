@@ -3,16 +3,16 @@
     <string name="blankWord">_ _ _ _ _ _</string>
     <string name="a">A</string>
     <string name="choose_a_letter">Choose a letter</string>
-    <string name="banana">BANANA</string>
-    <string name="apple">APPLE</string>
-    <string name="orange">ORANGE</string>
-    <string name="cat">CAT</string>
-    <string name="rose">ROSE</string>
-    <string name="tulip">TULIP</string>
-    <string name="ixora">IXORA</string>
-    <string name="canada">CANADA</string>
-    <string name="funny">FUNNY</string>
-    <string name="yellow">YELLOW</string>
+<!--    <string name="banana">BANANA</string>-->
+<!--    <string name="apple">APPLE</string>-->
+<!--    <string name="orange">ORANGE</string>-->
+<!--    <string name="cat">CAT</string>-->
+<!--    <string name="rose">ROSE</string>-->
+<!--    <string name="tulip">TULIP</string>-->
+<!--    <string name="ixora">IXORA</string>-->
+<!--    <string name="canada">CANADA</string>-->
+<!--    <string name="funny">FUNNY</string>-->
+<!--    <string name="yellow">YELLOW</string>-->
     <string name="hint">Hint</string>
     <string name="new_game">New Game</string>
 </resources>

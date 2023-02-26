@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import com.example.myapplication.Interfaces.ActivityCallback
 import com.example.myapplication.Interfaces.HangmanCallback
 import com.example.myapplication.ViewModel.HangmanViewModel
 import com.example.myapplication.databinding.FragmentHangmanBinding
@@ -17,6 +20,8 @@ class HangmanFragment : Fragment(), HangmanCallback {
     private lateinit var binding: FragmentHangmanBinding
 
     private lateinit var model:HangmanViewModel
+
+    private lateinit var activityCallback: ActivityCallback
     companion object {
         fun newInstance() = HangmanFragment()
     }
@@ -38,7 +43,7 @@ class HangmanFragment : Fragment(), HangmanCallback {
 
     override fun updateImage() {
         model.image_number+=1
-        var image_number=model.image_number
+        var image_number = model.image_number
         Log.d(this.tag,"update images $image_number")
         var hangmanImage = binding.hangmanImage
         when (image_number) {
@@ -62,6 +67,23 @@ class HangmanFragment : Fragment(), HangmanCallback {
         binding.wordLine.setText(resultText.toString())
         // Because the text of word line is some string
         // of one underscore followed by another sapce
+    }
+
+    override fun updateWordLine(wordToDisplay: String) {
+        Log.d("Updated wordLine in Hangman Fragment", "$wordToDisplay")
+        binding.wordLine.text = wordToDisplay
+    }
+
+    override fun displayHint(hint: String) {
+        Log.d("Display Hint", hint)
+        Toast.makeText(this.context, hint, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var activity = activity as MainActivity
+        activity.hangmanCallback = this
+        activity.updateWordDisplay()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -19,18 +19,21 @@ import com.example.myapplication.databinding.FragmentKeyboardBinding
 class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
     lateinit var dataPasser: ActivityCallback
-
     private lateinit var viewModel: KeyboardViewModel
-
     private lateinit var _binding: FragmentKeyboardBinding
+    var hintButtonPressedNumber = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         dataPasser = context as ActivityCallback
     }
 
-    fun passData(data: String){
+    fun passLetter(data: String){
         dataPasser.sendCharMessage(data)
+    }
+
+    private fun passNumberOfTimesHintPressed() {
+        dataPasser.hintPressedNumber(hintButtonPressedNumber)
     }
 
     override fun onCreateView(
@@ -39,20 +42,31 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     ): View? {
         _binding = FragmentKeyboardBinding.inflate(inflater, container, false)
         setButtonListeners()
-//        val intent = Intent(this.context, MainActivity::class.java)
-//        intent.putExtra("letter", letter.text.toString())
-//        ContextCompat.startActivity(intent)
+        _binding.hintButton.setOnClickListener {
+            hintButtonPressedNumber += 1
+            passNumberOfTimesHintPressed()
+        }
+
+        _binding.newGameButton.setOnClickListener {
+            dataPasser.clearSavedState()
+        }
 
         return _binding.root
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity as MainActivity
+        activity.keyboardFragmentCallback = this
+//        activity.updateWordDisplay()
+    }
+
     private fun setButtonListeners(){
-        for(i in 0 until  _binding.letterContainer.childCount)
-        {
+        for(i in 0 until  _binding.letterContainer.childCount) {
             val view = _binding.letterContainer[0] as TableRow
-            for(j in 0 until view.childCount)
-            {
-                var button=view.get(j) as Button
+            for(j in 0 until view.childCount) {
+                val button=view.get(j) as Button
                 button.setOnClickListener {
                     button.isEnabled=false
                     button.isClickable=false
@@ -74,12 +88,10 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
      * call this function if you want to enable all buttons
      */
     override fun resetButtonAvailability() {
-        for(i in 0 until  _binding.letterContainer.childCount)
-        {
+        for(i in 0 until  _binding.letterContainer.childCount) {
             val view = _binding.letterContainer.getChildAt(i) as TableRow
-            for(j in 0 until view.childCount)
-            {
-                var button=view[j] as Button
+            for(j in 0 until view.childCount) {
+                val button=view[j] as Button
                 button.isClickable=true
                 button.isEnabled=true
             }
