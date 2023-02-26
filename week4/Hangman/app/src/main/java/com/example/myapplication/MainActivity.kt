@@ -46,12 +46,34 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 //            keyboardFragmentCallback = fm.findFragmentById(R.id.fragment_keyboard) as KeyboardFragmentCallback
 //    }
 
+    /**
+     * return where the character should be, return an empty array if character is not in target word
+     */
+    private fun getCharacterPosition(ch:Char,targetWord:String):List<Int>{
+        var ans= arrayListOf<Int>()
+        for(i in 0 until  targetWord.length)
+        {
+            if(targetWord[i]==ch)
+                ans.add(i)
+        }
+        return ans
+    }
+
 
     override fun sendCharMessage(data: String) {
         Log.d("LOG", "$data clicked")
+        var res=getCharacterPosition(data[0],wordViewModel.currentWordText)
+        if(res.size==0)
+        {
+            //wrong answer
+        }else
+        {
+            for(i in 0 until res.size){
+                hangmanCallback.setCorrectCharacterAt(res[i],data[0])
+            }
+        }
         wordViewModel.append(data)
 //        getCallBackInterfaces()
-        hangmanCallback.setCorrectCharacterAt(0,data[0])
 //        checkInput(data)
 
     }

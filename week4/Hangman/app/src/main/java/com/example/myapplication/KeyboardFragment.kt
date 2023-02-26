@@ -64,7 +64,7 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
     private fun setButtonListeners(){
         for(i in 0 until  _binding.letterContainer.childCount) {
-            val view = _binding.letterContainer[0] as TableRow
+            val view = _binding.letterContainer[i] as TableRow
             for(j in 0 until view.childCount) {
                 val button=view.get(j) as Button
                 button.setOnClickListener {
