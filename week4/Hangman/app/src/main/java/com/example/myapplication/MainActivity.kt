@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     override fun sendCharMessage(data: String) {
         Log.d("LOG", "$data clicked")
+        wordViewModel.append(data)
         getCallBackInterfaces()
         hangmanCallback.setCorrectCharacterAt(0,data[0])
 //        checkInput(data)

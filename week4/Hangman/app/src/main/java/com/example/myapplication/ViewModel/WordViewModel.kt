@@ -1,5 +1,7 @@
 package com.example.myapplication.ViewModel
 
+import android.content.Context
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
@@ -7,6 +9,10 @@ import com.example.myapplication.R
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
 const val CURRENT_KILL = "CURRENT_KILL"
+
+const val CURRENT_WORD_DISPLAY = "CURRENT_WORD_DISPLAY"
+
+const val CURRENT_LETTER_CLICKED = "CURRENT_LETTER_CLICKED"
 
 class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
     private val wordList = listOf(
@@ -31,6 +37,15 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = savedStateHandle.get(CURRENT_KILL) ?: 0
         set(value) = savedStateHandle.set(CURRENT_KILL, value)
 
+//    var currentWordDisplay: String
+//        get() = savedStateHandle.get(CURRENT_WORD_DISPLAY) ?: ""
+//        set(value) = savedStateHandle.set(CURRENT_KILL, value)
+
+//    var currentLetterClicked : String
+    var currentLetterClicked: String
+        get() = savedStateHandle.get(CURRENT_LETTER_CLICKED) ?: ""
+        set(value) = savedStateHandle.set(CURRENT_LETTER_CLICKED, value)
+
     val currentWordText: Int
         get() = wordList[currentIndex].textResId
 
@@ -39,5 +54,13 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
     private fun rand(start: Int, end: Int): Int {
         return (start..end).random()
+    }
+
+//    private fun initWordDisplay() {
+//        for (i in 0 until Context.getString(currentWordText).length)
+//    }
+
+    fun append(letter : String) {
+        currentLetterClicked += letter
     }
 }
