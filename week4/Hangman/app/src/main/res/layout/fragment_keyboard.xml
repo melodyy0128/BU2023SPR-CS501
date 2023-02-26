@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/choose_a_letter"
-            android:textSize="20sp" />
+            android:textSize="34sp" />
     </LinearLayout>
 
     <TableLayout

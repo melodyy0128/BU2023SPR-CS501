@@ -13,11 +13,11 @@ import com.example.myapplication.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), ActivityCallback {
 
+    private lateinit var binding: ActivityMainBinding
+
     private val wordViewModel: WordViewModel by viewModels()
 
-    private var kill = wordViewModel.currentError
-
-    private lateinit var binding: ActivityMainBinding
+    private var kill = 0
 
     private lateinit var hangmanCallback: HangmanCallback
 
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
+        kill = wordViewModel.currentError
 //        val hangmanFragment = HangmanFragment()
 //        val keyboardFragment = KeyboardFragment()
 //
