@@ -13,4 +13,6 @@
     <string name="canada">CANADA</string>
     <string name="funny">FUNNY</string>
     <string name="yellow">YELLOW</string>
+    <string name="hint">Hint</string>
+    <string name="new_game">New Game</string>
 </resources>
