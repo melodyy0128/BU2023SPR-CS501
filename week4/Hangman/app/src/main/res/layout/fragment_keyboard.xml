@@ -273,12 +273,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
+            android:textSize="20sp"
             android:text="@string/hint" />
 
         <Button
             android:id="@+id/new_game_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:text="@string/new_game" />
     </LinearLayout>
 
