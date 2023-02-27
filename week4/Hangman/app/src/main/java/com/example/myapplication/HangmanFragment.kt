@@ -116,7 +116,7 @@ class HangmanFragment : Fragment(), HangmanCallback {
         var activity = activity as MainActivity
         activity.hangmanCallback = this
         activity.updateWordDisplay()
-
+        updateImage(activity.wordViewModel.currentUserMistakeCount)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
