@@ -6,4 +6,6 @@ interface HangmanCallback {
     fun updateWordLine(word: String)
     fun displayHint(hint: String)
     fun displayAnswerOnLose(answer: String)
+
+    fun getCurrentResultText():String
 }

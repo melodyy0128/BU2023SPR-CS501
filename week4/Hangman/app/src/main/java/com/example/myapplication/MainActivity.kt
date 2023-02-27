@@ -15,8 +15,7 @@ import com.example.myapplication.ViewModel.WordViewModel
 class MainActivity : AppCompatActivity(), ActivityCallback {
 
     private lateinit var binding: ActivityMainBinding
-    private val wordViewModel: WordViewModel by viewModels()
-    private var kill = 0
+    val wordViewModel: WordViewModel by viewModels()
     private var answer = ""
     lateinit var hangmanCallback: HangmanCallback
     lateinit var keyboardFragmentCallback: KeyboardFragmentCallback
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
-        kill = wordViewModel.currentError
         answer = wordViewModel.currentWordText
         Log.d("Answer in onCreate", answer)
         Log.d("Main activity index", wordViewModel.currentIndex.toString())
@@ -51,18 +49,18 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     }
 
     override fun sendCharMessage(data: String) {
-        kill = wordViewModel.currentError
         Log.d("LOG", "$data clicked")
         val res = getCharacterPosition(data[0],wordViewModel.currentWordText)
         Log.d("send char message", res.toString())
         if(res.isEmpty()) {
             //wrong answer
-            kill++
-            wordViewModel.currentError = kill
-            Log.d("Update number of errors", kill.toString())
-            hangmanCallback.updateImage(kill)
 
-            if (kill == 9) {
+            wordViewModel.currentUserMistakeCount+=1
+            Log.d("Update number of errors",
+                wordViewModel.currentUserMistakeCount.toString())
+            hangmanCallback.updateImage(wordViewModel.currentUserMistakeCount)
+
+            if ( wordViewModel.currentUserMistakeCount== 9) {
                 keyboardFragmentCallback.disableAllButtons()
                 Toast.makeText(this, "You lose!", Toast.LENGTH_LONG).show()
                 hangmanCallback.displayAnswerOnLose(wordViewModel.currentWordText)
@@ -71,12 +69,13 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
             for(element in res){
                 hangmanCallback.setCorrectCharacterAt(element,data[0])
             }
+            wordViewModel.currentWordDisplay=hangmanCallback.getCurrentResultText()
         }
         wordViewModel.append(data)
     }
 
     override fun hintPressedNumber(number: Int) {
-        if (kill == 8) {
+        if ( wordViewModel.currentUserMistakeCount== 8) {
             Toast.makeText(this, "Hint not available", Toast.LENGTH_LONG).show()
         } else {
             if (number == 1) {
@@ -89,16 +88,12 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         }
     }
 
-    override fun clearSavedState() {
+    override fun gameReset() {
         Log.d("MainActivity and WordViewModel clear saved state", "Replacing " +
                 "hangman fragment and clearing saved states in word view model")
         wordViewModel.clearSavedState()
-        val fragmentHangman = fm.findFragmentById(R.id.fragment_hangman)
-        if (fragmentHangman != null) {
-            fm.beginTransaction().remove(fragmentHangman).commit()
-            val hangmanFragment = HangmanFragment()
-            fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
-        }
+        hangmanCallback.updateImage(0)
+        hangmanCallback.updateWordLine(wordViewModel.currentWordDisplay)
         keyboardFragmentCallback.resetButtonAvailability()
     }
 
@@ -109,23 +104,13 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         }
     }
 
-    //TODO:check letter with word
-    //valid user's input
-    private fun checkInput(letter : String) {
-        val hangmanFragment = HangmanFragment()
-        val bundle = Bundle()
-        bundle.putString("letter", letter)
-        bundle.putInt("image_number", kill)
-        hangmanFragment.arguments = bundle
-        fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
-    }
 
     override fun onPause() {
         super.onPause()
         wordViewModel.currentIndex = wordViewModel.currentIndex
-        wordViewModel.currentError = wordViewModel.currentError
+        wordViewModel.currentUserMistakeCount = wordViewModel.currentUserMistakeCount
         wordViewModel.currentWordDisplay = wordViewModel.currentWordDisplay
-        wordViewModel.currentLetterClicked = wordViewModel.currentLetterClicked
+        wordViewModel.currentLetterClickedSequence = wordViewModel.currentLetterClickedSequence
 
     }
 }

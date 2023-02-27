@@ -107,11 +107,16 @@ class HangmanFragment : Fragment(), HangmanCallback {
         binding.wordLine.text = wordLineText
     }
 
+    override fun getCurrentResultText(): String {
+        return binding.wordLine.text.toString()
+    }
+
     override fun onResume() {
         super.onResume()
         var activity = activity as MainActivity
         activity.hangmanCallback = this
         activity.updateWordDisplay()
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

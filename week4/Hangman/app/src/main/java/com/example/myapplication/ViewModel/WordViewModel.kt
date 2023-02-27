@@ -1,10 +1,8 @@
 package com.example.myapplication.ViewModel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.R
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 const val CURRENT_ERROR = "CURRENT_ERROR"
@@ -31,7 +29,7 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = savedStateHandle.get<Int>(CURRENT_INDEX_KEY) ?: rand(0, wordList.size - 1)
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
-     var currentError: Int
+     var currentUserMistakeCount: Int
         get() = savedStateHandle.get<Int>(CURRENT_ERROR) ?: 0
         set(value) = savedStateHandle.set(CURRENT_ERROR, value)
 
@@ -39,7 +37,7 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = savedStateHandle.get<String>(CURRENT_WORD_DISPLAY) ?: initWordDisplay()
         set(value) = savedStateHandle.set(CURRENT_WORD_DISPLAY, value)
 
-    var currentLetterClicked: String
+    var currentLetterClickedSequence: String
         get() = savedStateHandle.get<String>(CURRENT_LETTER_CLICKED) ?: ""
         set(value) = savedStateHandle.set(CURRENT_LETTER_CLICKED, value)
 
@@ -66,17 +64,19 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     }
 
     fun append(letter : String) {
-        currentLetterClicked += letter
+        currentLetterClickedSequence += letter
     }
 
     fun clearSavedState() {
         Log.d("Clear Word View Model", "Clearing saved states in word view model")
         savedStateHandle.remove<Int>(CURRENT_INDEX_KEY)
-        savedStateHandle.remove<Int>(CURRENT_ERROR)
-        savedStateHandle.set(CURRENT_ERROR, 0)
-        currentError = savedStateHandle[CURRENT_ERROR]!!
-        Log.d("Current Error after resetting in WordViewModel", currentError.toString())
-        savedStateHandle.remove<String>(CURRENT_LETTER_CLICKED)
+//        savedStateHandle.remove<Int>(CURRENT_ERROR)
+//        savedStateHandle.set(CURRENT_ERROR, 0)
+//        currentUserMistakeCount = savedStateHandle[CURRENT_ERROR]!!
+        currentUserMistakeCount = 0
+        Log.d("Current Error after resetting in WordViewModel", currentUserMistakeCount.toString())
+//        savedStateHandle.remove<String>(CURRENT_LETTER_CLICKED)
         savedStateHandle.remove<String>(CURRENT_WORD_DISPLAY)
+        currentLetterClickedSequence=""
     }
 }

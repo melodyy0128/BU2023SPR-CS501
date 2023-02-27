@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
-import android.widget.Toast
 import androidx.core.view.get
 import com.example.myapplication.Interfaces.ActivityCallback
 import com.example.myapplication.Interfaces.KeyboardFragmentCallback
@@ -50,7 +49,7 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
         _binding.newGameButton.setOnClickListener {
             Log.d("Clear Saved State KeyboardFragment", "Call Main Activity clearSavedState")
-            dataPasser.clearSavedState()
+            dataPasser.gameReset()
         }
 
         return _binding.root
@@ -61,6 +60,7 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
         super.onResume()
         val activity = activity as MainActivity
         activity.keyboardFragmentCallback = this
+        setButtonsBeingClicked(activity.wordViewModel.currentLetterClickedSequence)
 //        activity.updateWordDisplay()
     }
 
@@ -100,6 +100,19 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
         }
     }
 
+     override fun setButtonsBeingClicked(sequence:String){
+        for(i in 0 until  _binding.letterContainer.childCount) {
+            val view = _binding.letterContainer.getChildAt(i) as TableRow
+            for(j in 0 until view.childCount) {
+                val button=view[j] as Button
+                if(sequence.contains(button.text.toString()))
+                {
+                    button.isClickable = false
+                    button.isEnabled = false
+                }
+            }
+        }
+    }
     override fun disableAllButtons() {
         for(i in 0 until  _binding.letterContainer.childCount) {
             val view = _binding.letterContainer.getChildAt(i) as TableRow
@@ -107,6 +120,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
                 val button=view[j] as Button
                 button.isClickable = false
                 button.isEnabled = false
+                var act=activity as MainActivity
+                act.wordViewModel.append(button.text.toString())
             }
         }
     }
