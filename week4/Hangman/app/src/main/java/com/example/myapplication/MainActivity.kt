@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
             hangmanCallback.updateImage(kill)
 
             if (kill == 9) {
+                keyboardFragmentCallback.disableAllButtons()
                 Toast.makeText(this, "You lose!", Toast.LENGTH_LONG).show()
             }
         } else {
@@ -80,8 +81,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         }
         wordViewModel.append(data)
     }
-
-
 
     override fun hintPressedNumber(number: Int) {
         if (kill == 8) {
@@ -100,10 +99,12 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     override fun clearSavedState() {
         Log.d("Call Clear Word View Model", "Call clear saved states in word view model")
         wordViewModel.clearSavedState()
+        keyboardFragmentCallback.resetButtonAvailability()
     }
 
     override fun checkWinningCondition(wordDisplayWithoutWhitespace: String) {
         if (wordDisplayWithoutWhitespace == wordViewModel.currentWordText) {
+            keyboardFragmentCallback.disableAllButtons()
             Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show()
         }
     }

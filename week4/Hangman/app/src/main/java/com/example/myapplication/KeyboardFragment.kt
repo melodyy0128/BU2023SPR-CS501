@@ -92,11 +92,23 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
             val view = _binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount) {
                 val button=view[j] as Button
-                button.isClickable=true
-                button.isEnabled=true
+                button.isClickable = true
+                button.isEnabled = true
             }
         }
     }
+
+    override fun disableAllButtons() {
+        for(i in 0 until  _binding.letterContainer.childCount) {
+            val view = _binding.letterContainer.getChildAt(i) as TableRow
+            for(j in 0 until view.childCount) {
+                val button=view[j] as Button
+                button.isClickable = false
+                button.isEnabled = false
+            }
+        }
+    }
+
 
     companion object {
         fun newInstance() = KeyboardFragment()
