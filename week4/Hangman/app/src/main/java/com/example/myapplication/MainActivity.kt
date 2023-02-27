@@ -108,6 +108,14 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
     }
 
+    override fun onPause() {
+        super.onPause()
+        wordViewModel.currentIndex=wordViewModel.currentIndex
+        wordViewModel.currentError=wordViewModel.currentError
+        wordViewModel.currentWordDisplay=wordViewModel.currentWordDisplay
+        wordViewModel.currentLetterClicked=wordViewModel.currentLetterClicked
+
+    }
     private fun hangmanChangeImage(){
 //        getCallBackInterfaces()
         hangmanCallback.updateImage()

@@ -15,16 +15,6 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
 //    var ctx: Context?=null
     private val wordList = listOf(
-//        Word(R.string.banana, "Fruit"),
-//        Word(R.string.apple, "Fruit"),
-//        Word(R.string.orange, "Color"),
-//        Word(R.string.cat, "Animal"),
-//        Word(R.string.rose, "Flower"),
-//        Word(R.string.tulip, "Flower"),
-//        Word(R.string.ixora, "Flower"),
-//        Word(R.string.canada, "Country"),
-//        Word(R.string.funny, "Emotion"),
-//        Word(R.string.yellow, "Color"),
         Word("BANANA", "Fruit"),
         Word("APPLE", "Fruit"),
         Word("ORANGE", "Color"),
@@ -38,19 +28,19 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     )
 
     var currentIndex: Int
-        get() = savedStateHandle[CURRENT_INDEX_KEY] ?: rand(0, wordList.size - 1)
+        get() = savedStateHandle.get<Int>(CURRENT_INDEX_KEY)?: rand(0, wordList.size - 1)
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
      var currentError: Int
-        get() = savedStateHandle[CURRENT_KILL] ?: 0
+        get() = savedStateHandle.get<Int>(CURRENT_KILL) ?: 0
         set(value) = savedStateHandle.set(CURRENT_KILL, value)
 
     var currentWordDisplay: String
-        get() = savedStateHandle[CURRENT_WORD_DISPLAY] ?: initWordDisplay()
+        get() = savedStateHandle.get<String>(CURRENT_WORD_DISPLAY) ?: initWordDisplay()
         set(value) = savedStateHandle.set(CURRENT_WORD_DISPLAY, value)
 
     var currentLetterClicked: String
-        get() = savedStateHandle[CURRENT_LETTER_CLICKED] ?: ""
+        get() = savedStateHandle.get<String>(CURRENT_LETTER_CLICKED) ?: ""
         set(value) = savedStateHandle.set(CURRENT_LETTER_CLICKED, value)
 
     val currentWordText: String
@@ -60,8 +50,10 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         get() = wordList[currentIndex].hint
 
     private fun rand(start: Int, end: Int): Int {
-        return (start..end).random()
+        currentIndex=(start..end).random()
+        return currentIndex
     }
+
 
 
     private fun initWordDisplay(): String {
