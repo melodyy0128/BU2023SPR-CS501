@@ -244,6 +244,13 @@
                 android:layout_weight="1"
                 android:text="X"
                 android:textSize="20sp" />
+            <Button
+                android:id="@+id/y"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="y"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/z"
@@ -253,13 +260,7 @@
                 android:text="Z"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/y"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="y"
-                android:textSize="20sp" />
+
         </TableRow>
 
     </TableLayout>
