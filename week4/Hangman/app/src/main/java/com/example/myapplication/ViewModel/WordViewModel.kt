@@ -73,6 +73,9 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         Log.d("Clear Word View Model", "Clearing saved states in word view model")
         savedStateHandle.remove<Int>(CURRENT_INDEX_KEY)
         savedStateHandle.remove<Int>(CURRENT_ERROR)
+        savedStateHandle.set(CURRENT_ERROR, 0)
+        currentError = savedStateHandle[CURRENT_ERROR]!!
+        Log.d("Current Error after resetting in WordViewModel", currentError.toString())
         savedStateHandle.remove<String>(CURRENT_LETTER_CLICKED)
         savedStateHandle.remove<String>(CURRENT_WORD_DISPLAY)
     }

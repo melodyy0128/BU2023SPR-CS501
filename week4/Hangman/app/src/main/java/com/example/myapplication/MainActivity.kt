@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
         kill = wordViewModel.currentError
-//        wordViewModel.ctx = this
         answer = wordViewModel.currentWordText
         Log.d("Answer in onCreate", answer)
         Log.d("Main activity index", wordViewModel.currentIndex.toString())
@@ -35,16 +34,8 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     fun updateWordDisplay() {
         hangmanCallback.updateWordLine(wordViewModel.currentWordDisplay)
-        Log.d("Answer in updateWordDisplay", wordViewModel.currentIndex.toString())
-        Log.d("Answer in updateWordDisplay", answer)
         Log.d("Main Activity Update Word Display", wordViewModel.currentWordText)
     }
-
-
-//    private fun getCallBackInterfaces() {
-//            hangmanCallback = fm.findFragmentById(R.id.fragment_hangman) as HangmanCallback
-//            keyboardFragmentCallback = fm.findFragmentById(R.id.fragment_keyboard) as KeyboardFragmentCallback
-//    }
 
     /**
      * return where the character should be, return an empty array if character is not in target word
@@ -59,14 +50,15 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         return ans
     }
 
-
     override fun sendCharMessage(data: String) {
+        kill = wordViewModel.currentError
         Log.d("LOG", "$data clicked")
         val res = getCharacterPosition(data[0],wordViewModel.currentWordText)
         Log.d("send char message", res.toString())
         if(res.isEmpty()) {
             //wrong answer
             kill++
+            wordViewModel.currentError = kill
             Log.d("Update number of errors", kill.toString())
             hangmanCallback.updateImage(kill)
 
@@ -98,8 +90,15 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     }
 
     override fun clearSavedState() {
-        Log.d("Call Clear Word View Model", "Call clear saved states in word view model")
+        Log.d("MainActivity and WordViewModel clear saved state", "Replacing " +
+                "hangman fragment and clearing saved states in word view model")
         wordViewModel.clearSavedState()
+        val fragmentHangman = fm.findFragmentById(R.id.fragment_hangman)
+        if (fragmentHangman != null) {
+            fm.beginTransaction().remove(fragmentHangman).commit()
+            val hangmanFragment = HangmanFragment()
+            fm.beginTransaction().replace(R.id.fragment_hangman, hangmanFragment).commit()
+        }
         keyboardFragmentCallback.resetButtonAvailability()
     }
 
@@ -129,9 +128,4 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         wordViewModel.currentLetterClicked = wordViewModel.currentLetterClicked
 
     }
-//    private fun hangmanChangeImage(){
-////        getCallBackInterfaces()
-//        hangmanCallback.updateImage(kill)
-//    }
-
 }

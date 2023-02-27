@@ -81,8 +81,6 @@ class HangmanFragment : Fragment(), HangmanCallback {
         activityCallback.checkWinningCondition(wordDisplayWithoutWhitespace)
     }
 
-
-
     override fun updateWordLine(wordToDisplay: String) {
         Log.d("Updated wordLine in Hangman Fragment", wordToDisplay)
         binding.wordLine.text = wordToDisplay
