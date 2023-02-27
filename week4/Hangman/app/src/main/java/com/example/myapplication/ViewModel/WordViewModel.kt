@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
-const val CURRENT_KILL = "CURRENT_KILL"
+const val CURRENT_ERROR = "CURRENT_ERROR"
 const val CURRENT_WORD_DISPLAY = "CURRENT_WORD_DISPLAY"
 const val CURRENT_LETTER_CLICKED = "CURRENT_LETTER_CLICKED"
 
@@ -28,12 +28,12 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     )
 
     var currentIndex: Int
-        get() = savedStateHandle.get<Int>(CURRENT_INDEX_KEY)?: rand(0, wordList.size - 1)
+        get() = savedStateHandle.get<Int>(CURRENT_INDEX_KEY) ?: rand(0, wordList.size - 1)
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
      var currentError: Int
-        get() = savedStateHandle.get<Int>(CURRENT_KILL) ?: 0
-        set(value) = savedStateHandle.set(CURRENT_KILL, value)
+        get() = savedStateHandle.get<Int>(CURRENT_ERROR) ?: 0
+        set(value) = savedStateHandle.set(CURRENT_ERROR, value)
 
     var currentWordDisplay: String
         get() = savedStateHandle.get<String>(CURRENT_WORD_DISPLAY) ?: initWordDisplay()
@@ -54,8 +54,6 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         return currentIndex
     }
 
-
-
     private fun initWordDisplay(): String {
         var wordDisplay = ""
         Log.d("init Word index", currentIndex.toString())
@@ -63,10 +61,6 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         for (i in currentWordText.indices) {
             wordDisplay += "_ "
         }
-//        Log.d("Word View Model initWordDisplay", ctx!!.getString(currentWordText))
-//        for (i in 0 until ctx!!.getString(currentWordText).length) {
-//            wordDisplay += "_ "
-//        }
 
         return wordDisplay
     }
@@ -77,6 +71,9 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
     fun clearSavedState() {
         Log.d("Clear Word View Model", "Clearing saved states in word view model")
-        onCleared()
+        savedStateHandle.remove<Int>(CURRENT_INDEX_KEY)
+        savedStateHandle.remove<Int>(CURRENT_ERROR)
+        savedStateHandle.remove<String>(CURRENT_LETTER_CLICKED)
+        savedStateHandle.remove<String>(CURRENT_WORD_DISPLAY)
     }
 }

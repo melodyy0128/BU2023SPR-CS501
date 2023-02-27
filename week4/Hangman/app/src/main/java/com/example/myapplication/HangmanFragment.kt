@@ -81,6 +81,8 @@ class HangmanFragment : Fragment(), HangmanCallback {
         activityCallback.checkWinningCondition(wordDisplayWithoutWhitespace)
     }
 
+
+
     override fun updateWordLine(wordToDisplay: String) {
         Log.d("Updated wordLine in Hangman Fragment", wordToDisplay)
         binding.wordLine.text = wordToDisplay
@@ -89,6 +91,22 @@ class HangmanFragment : Fragment(), HangmanCallback {
     override fun displayHint(hint: String) {
         Log.d("Display Hint", hint)
         Toast.makeText(this.context, hint, Toast.LENGTH_LONG).show()
+    }
+
+    override fun displayAnswerOnLose(answer: String) {
+        var wordLineText = binding.wordLine.text.toString()
+        val displayChars = wordLineText.toCharArray()
+        val answerChars = answer.toCharArray()
+        Log.d("Before setting char", displayChars.toString())
+        for (i in wordLineText.indices) {
+            if (i % 2 == 0) {
+                displayChars[i] = answerChars[ceil(i / 2.0).toInt()]
+                Log.d("Display correct char", displayChars.toString())
+            }
+        }
+        wordLineText = String(displayChars)
+        Log.d("After displaying all correct chars", wordLineText)
+        binding.wordLine.text = wordLineText
     }
 
     override fun onResume() {

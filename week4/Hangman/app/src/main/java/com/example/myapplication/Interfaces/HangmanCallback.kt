@@ -5,4 +5,5 @@ interface HangmanCallback {
     fun setCorrectCharacterAt(index:Int, char: Char)
     fun updateWordLine(word: String)
     fun displayHint(hint: String)
+    fun displayAnswerOnLose(answer: String)
 }

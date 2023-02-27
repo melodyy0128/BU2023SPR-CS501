@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
             if (kill == 9) {
                 keyboardFragmentCallback.disableAllButtons()
                 Toast.makeText(this, "You lose!", Toast.LENGTH_LONG).show()
+                hangmanCallback.displayAnswerOnLose(wordViewModel.currentWordText)
             }
         } else {
             for(element in res){
