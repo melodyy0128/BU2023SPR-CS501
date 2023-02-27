@@ -81,9 +81,34 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
             if (number == 1) {
                 hangmanCallback.displayHint(wordViewModel.currentWordHint)
             } else if (number == 2) {
-                // TODO disable half of the remaining letters in the word that are not part of the game
+                var str:String=""
+                var counter:Int=(26-wordViewModel.currentLetterClickedSequence.length)/2
+                for(i in 'A'.toInt()..'Z'.toInt()) {
+                    if (counter == 0)
+                        break
+                    if (!wordViewModel.currentWordText.contains(i.toChar())) {
+                        counter--
+                        str += i.toChar()
+
+                    }
+                }
+                wordViewModel.currentLetterClickedSequence+=str
+                keyboardFragmentCallback.setButtonsBeingClicked(str)
             } else if (number == 3) {
                 // TODO Display all the vowels in the word and disable all vowels
+                var str="AEIOU"
+                for(i in 0 until str.length)
+                {
+                    if(wordViewModel.currentWordText.contains(str[i])) {
+                        var res=getCharacterPosition(str[i],wordViewModel.currentWordText)
+                        for(ele in res)
+                            hangmanCallback.setCorrectCharacterAt(ele,str[i])
+                    }
+                }
+                wordViewModel.currentWordDisplay=hangmanCallback.getCurrentResultText()
+                wordViewModel.currentLetterClickedSequence+=str
+                keyboardFragmentCallback.setButtonsBeingClicked(str)
+
             }
         }
     }
