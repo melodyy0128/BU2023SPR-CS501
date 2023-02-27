@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +15,11 @@ import com.example.myapplication.Interfaces.ActivityCallback
 import com.example.myapplication.Interfaces.HangmanCallback
 import com.example.myapplication.ViewModel.HangmanViewModel
 import com.example.myapplication.databinding.FragmentHangmanBinding
+import kotlin.math.ceil
 
 class HangmanFragment : Fragment(), HangmanCallback {
 
     private lateinit var binding: FragmentHangmanBinding
-
-    private lateinit var model:HangmanViewModel
 
     private lateinit var activityCallback: ActivityCallback
     companion object {
@@ -27,6 +27,11 @@ class HangmanFragment : Fragment(), HangmanCallback {
     }
 
     private lateinit var viewModel: HangmanViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activityCallback = context as ActivityCallback
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +46,10 @@ class HangmanFragment : Fragment(), HangmanCallback {
         return binding.root
     }
 
-    override fun updateImage() {
-        model.image_number+=1
-        var image_number = model.image_number
-        Log.d(this.tag,"update images $image_number")
-        var hangmanImage = binding.hangmanImage
-        when (image_number) {
+    override fun updateImage(kill: Int) {
+        Log.d(this.tag,"update images $kill")
+        val hangmanImage = binding.hangmanImage
+        when (kill) {
             0 -> hangmanImage.setImageResource(R.drawable.h0)
             1 -> hangmanImage.setImageResource(R.drawable.h1)
             2 -> hangmanImage.setImageResource(R.drawable.h2)
@@ -62,15 +65,24 @@ class HangmanFragment : Fragment(), HangmanCallback {
 
     override fun setCorrectCharacterAt(index: Int, char: Char) {
         var wordLineText = binding.wordLine.text.toString()
-        var resultText:StringBuffer= StringBuffer(wordLineText)
-        resultText.setCharAt(index/2,char)
-        binding.wordLine.setText(resultText.toString())
-        // Because the text of word line is some string
-        // of one underscore followed by another sapce
+        val chars = wordLineText.toCharArray()
+        Log.d("Before setting char", chars.toString())
+        for (i in wordLineText.indices) {
+            if (i == index * 2) {
+                chars[i] = char
+                Log.d("Setting char", chars.toString())
+            }
+        }
+        wordLineText = String(chars)
+        Log.d("After setting chars", wordLineText)
+        binding.wordLine.text = wordLineText
+
+        val wordDisplayWithoutWhitespace = binding.wordLine.text.toString().filter { !it.isWhitespace() }
+        activityCallback.checkWinningCondition(wordDisplayWithoutWhitespace)
     }
 
     override fun updateWordLine(wordToDisplay: String) {
-        Log.d("Updated wordLine in Hangman Fragment", "$wordToDisplay")
+        Log.d("Updated wordLine in Hangman Fragment", wordToDisplay)
         binding.wordLine.text = wordToDisplay
     }
 

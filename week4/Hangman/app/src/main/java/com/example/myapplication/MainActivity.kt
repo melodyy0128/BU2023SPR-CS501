@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
      * return where the character should be, return an empty array if character is not in target word
      */
     private fun getCharacterPosition(ch:Char,targetWord:String):List<Int>{
-        var ans= arrayListOf<Int>()
-        for(i in 0 until  targetWord.length)
-        {
-            if(targetWord[i]==ch)
+        val ans = arrayListOf<Int>()
+        for(i in targetWord.indices) {
+            if(targetWord[i] == ch) {
                 ans.add(i)
+            }
         }
         return ans
     }
@@ -62,21 +62,26 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     override fun sendCharMessage(data: String) {
         Log.d("LOG", "$data clicked")
-        var res=getCharacterPosition(data[0],wordViewModel.currentWordText)
-        if(res.size==0)
-        {
+        val res = getCharacterPosition(data[0],wordViewModel.currentWordText)
+        Log.d("send char message", res.toString())
+        if(res.isEmpty()) {
             //wrong answer
-        }else
-        {
-            for(i in 0 until res.size){
-                hangmanCallback.setCorrectCharacterAt(res[i],data[0])
+            kill++
+            Log.d("Update number of errors", kill.toString())
+            hangmanCallback.updateImage(kill)
+
+            if (kill == 9) {
+                Toast.makeText(this, "You lose!", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            for(element in res){
+                hangmanCallback.setCorrectCharacterAt(element,data[0])
             }
         }
         wordViewModel.append(data)
-//        getCallBackInterfaces()
-//        checkInput(data)
-
     }
+
+
 
     override fun hintPressedNumber(number: Int) {
         if (kill == 8) {
@@ -97,6 +102,12 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         wordViewModel.clearSavedState()
     }
 
+    override fun checkWinningCondition(wordDisplayWithoutWhitespace: String) {
+        if (wordDisplayWithoutWhitespace == wordViewModel.currentWordText) {
+            Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show()
+        }
+    }
+
     //TODO:check letter with word
     //valid user's input
     private fun checkInput(letter : String) {
@@ -110,15 +121,15 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     override fun onPause() {
         super.onPause()
-        wordViewModel.currentIndex=wordViewModel.currentIndex
-        wordViewModel.currentError=wordViewModel.currentError
-        wordViewModel.currentWordDisplay=wordViewModel.currentWordDisplay
-        wordViewModel.currentLetterClicked=wordViewModel.currentLetterClicked
+        wordViewModel.currentIndex = wordViewModel.currentIndex
+        wordViewModel.currentError = wordViewModel.currentError
+        wordViewModel.currentWordDisplay = wordViewModel.currentWordDisplay
+        wordViewModel.currentLetterClicked = wordViewModel.currentLetterClicked
 
     }
-    private fun hangmanChangeImage(){
-//        getCallBackInterfaces()
-        hangmanCallback.updateImage()
-    }
+//    private fun hangmanChangeImage(){
+////        getCallBackInterfaces()
+//        hangmanCallback.updateImage(kill)
+//    }
 
 }
