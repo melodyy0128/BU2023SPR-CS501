@@ -48,7 +48,7 @@ class KeyboardFragmentTest {
     }
 
     @Test
-    fun newGame() {
+    fun testButtonAvailabilityAfterNewGame() {
         onView(withId(R.id.p)).perform(click())
         onView(withId(R.id.p)).check(matches(not(isEnabled())))
         onView(withId(R.id.z)).perform(click())
