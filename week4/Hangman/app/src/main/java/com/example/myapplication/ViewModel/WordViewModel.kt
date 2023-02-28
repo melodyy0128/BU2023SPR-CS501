@@ -26,6 +26,8 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         Word("YELLOW", "Color"),
     )
 
+
+
     var currentIndex: Int
         get() = savedStateHandle.get<Int>(CURRENT_INDEX_KEY) ?: rand(0, wordList.size - 1)
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)

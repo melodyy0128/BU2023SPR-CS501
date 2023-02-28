@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
     private lateinit var binding: ActivityMainBinding
     val wordViewModel: WordViewModel by viewModels()
-    private var answer = ""
-    private var numberOfTimesHintPressed = 0
     lateinit var hangmanCallback: HangmanCallback
     lateinit var keyboardFragmentCallback: KeyboardFragmentCallback
     private val fm: FragmentManager = supportFragmentManager
@@ -26,9 +24,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
-        answer = wordViewModel.currentWordText
-        numberOfTimesHintPressed = wordViewModel.numberOfTimesHintPressed
-        Log.d("Answer in onCreate", answer)
+        Log.d("Answer in onCreate", wordViewModel.currentWordText)
         Log.d("Main activity index", wordViewModel.currentIndex.toString())
     }
 
@@ -92,7 +88,6 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
                     if (!wordViewModel.currentWordText.contains(i.toChar())) {
                         counter--
                         str += i.toChar()
-
                     }
                 }
                 wordViewModel.currentLetterClickedSequence += str
@@ -123,11 +118,13 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         hangmanCallback.updateImage(0)
         hangmanCallback.updateWordLine(wordViewModel.currentWordDisplay)
         keyboardFragmentCallback.resetButtonAvailability()
+        keyboardFragmentCallback.clearSelfStateInfo()
     }
 
     override fun checkWinningCondition(wordDisplayWithoutWhitespace: String) {
         if (wordDisplayWithoutWhitespace == wordViewModel.currentWordText) {
             keyboardFragmentCallback.disableAllButtons()
+            keyboardFragmentCallback.setHintHitCount(4)
             Toast.makeText(this, "You win!", Toast.LENGTH_LONG).show()
         }
     }

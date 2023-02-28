@@ -20,8 +20,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 
     lateinit var dataPasser: ActivityCallback
     private lateinit var viewModel: KeyboardViewModel
-    private lateinit var _binding: FragmentKeyboardBinding
-    var hintButtonPressedNumber = 0
+    private lateinit var binding: FragmentKeyboardBinding
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,26 +33,26 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     }
 
     private fun passNumberOfTimesHintPressed() {
-        dataPasser.hintPressedNumber(hintButtonPressedNumber)
+        viewModel.hintButtonPressedCount++
+        dataPasser.hintPressedNumber(viewModel.hintButtonPressedCount)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentKeyboardBinding.inflate(inflater, container, false)
+        binding = FragmentKeyboardBinding.inflate(inflater, container, false)
         setButtonListeners()
-        _binding.hintButton.setOnClickListener {
-            hintButtonPressedNumber += 1
+        binding.hintButton.setOnClickListener {
             passNumberOfTimesHintPressed()
         }
 
-        _binding.newGameButton.setOnClickListener {
+        binding.newGameButton.setOnClickListener {
             Log.d("Clear Saved State KeyboardFragment", "Call Main Activity clearSavedState")
             dataPasser.gameReset()
         }
 
-        return _binding.root
+        return binding.root
     }
 
 
@@ -65,8 +65,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     }
 
     private fun setButtonListeners(){
-        for(i in 0 until  _binding.letterContainer.childCount) {
-            val view = _binding.letterContainer[i] as TableRow
+        for(i in 0 until  binding.letterContainer.childCount) {
+            val view = binding.letterContainer[i] as TableRow
             for(j in 0 until view.childCount) {
                 val button=view.get(j) as Button
                 button.setOnClickListener {
@@ -90,8 +90,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
      * call this function if you want to enable all buttons
      */
     override fun resetButtonAvailability() {
-        for(i in 0 until  _binding.letterContainer.childCount) {
-            val view = _binding.letterContainer.getChildAt(i) as TableRow
+        for(i in 0 until  binding.letterContainer.childCount) {
+            val view = binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount) {
                 val button=view[j] as Button
                 button.isClickable = true
@@ -101,8 +101,8 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
     }
 
      override fun setButtonsBeingClicked(sequence:String){
-        for(i in 0 until  _binding.letterContainer.childCount) {
-            val view = _binding.letterContainer.getChildAt(i) as TableRow
+        for(i in 0 until  binding.letterContainer.childCount) {
+            val view = binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount) {
                 val button=view[j] as Button
                 if(sequence.contains(button.text.toString()))
@@ -113,9 +113,14 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
             }
         }
     }
+
+    override fun setHintHitCount(count: Int) {
+        viewModel.hintButtonPressedCount=count
+    }
+
     override fun disableAllButtons() {
-        for(i in 0 until  _binding.letterContainer.childCount) {
-            val view = _binding.letterContainer.getChildAt(i) as TableRow
+        for(i in 0 until  binding.letterContainer.childCount) {
+            val view = binding.letterContainer.getChildAt(i) as TableRow
             for(j in 0 until view.childCount) {
                 val button=view[j] as Button
                 button.isClickable = false
@@ -126,7 +131,9 @@ class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
         }
     }
 
-
+    override fun clearSelfStateInfo() {
+        viewModel.clearStateInfo()
+    }
 
 
     companion object {
