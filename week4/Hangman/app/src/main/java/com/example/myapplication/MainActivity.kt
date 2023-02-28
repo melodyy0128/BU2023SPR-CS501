@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
             if (number == 1) {
                 hangmanCallback.displayHint(wordViewModel.currentWordHint)
             } else if (number == 2) {
+                wordViewModel.currentUserMistakeCount++
+                hangmanCallback.updateImage(wordViewModel.currentUserMistakeCount)
                 var str:String = ""
                 var counter:Int = (26 - wordViewModel.currentLetterClickedSequence.length)/2
                 for(i in 'A'.code..'Z'.code) {
@@ -93,7 +95,9 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
                 wordViewModel.currentLetterClickedSequence += str
                 keyboardFragmentCallback.setButtonsBeingClicked(str)
             } else if (number == 3) {
-                // TODO Display all the vowels in the word and disable all vowels
+                // Display all the vowels in the word and disable all vowels
+                wordViewModel.currentUserMistakeCount++
+                hangmanCallback.updateImage(wordViewModel.currentUserMistakeCount)
                 val str="AEIOU"
                 for(i in str.indices) {
                     if(wordViewModel.currentWordText.contains(str[i])) {
@@ -102,8 +106,8 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
                             hangmanCallback.setCorrectCharacterAt(ele,str[i])
                     }
                 }
-                wordViewModel.currentWordDisplay=hangmanCallback.getCurrentResultText()
-                wordViewModel.currentLetterClickedSequence+=str
+                wordViewModel.currentWordDisplay = hangmanCallback.getCurrentResultText()
+                wordViewModel.currentLetterClickedSequence += str
                 keyboardFragmentCallback.setButtonsBeingClicked(str)
             } else {
                 Toast.makeText(this, "Hint not available", Toast.LENGTH_LONG).show()

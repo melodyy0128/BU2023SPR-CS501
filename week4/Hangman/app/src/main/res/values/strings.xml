@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Hangman</string>
     <string name="blankWord">_ _ _ _ _ _</string>
     <string name="a">A</string>
     <string name="choose_a_letter">Choose a letter</string>
