@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     private lateinit var binding: ActivityMainBinding
     val wordViewModel: WordViewModel by viewModels()
     private var answer = ""
+    private var numberOfTimesHintPressed = 0
     lateinit var hangmanCallback: HangmanCallback
     lateinit var keyboardFragmentCallback: KeyboardFragmentCallback
     private val fm: FragmentManager = supportFragmentManager
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         binding = ActivityMainBinding.inflate(layoutInflater);
         setContentView(binding.root)
         answer = wordViewModel.currentWordText
+        numberOfTimesHintPressed = wordViewModel.numberOfTimesHintPressed
         Log.d("Answer in onCreate", answer)
         Log.d("Main activity index", wordViewModel.currentIndex.toString())
     }
@@ -54,13 +56,12 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
         Log.d("send char message", res.toString())
         if(res.isEmpty()) {
             //wrong answer
-
-            wordViewModel.currentUserMistakeCount+=1
+            wordViewModel.currentUserMistakeCount += 1
             Log.d("Update number of errors",
                 wordViewModel.currentUserMistakeCount.toString())
             hangmanCallback.updateImage(wordViewModel.currentUserMistakeCount)
 
-            if ( wordViewModel.currentUserMistakeCount== 9) {
+            if ( wordViewModel.currentUserMistakeCount == 9) {
                 keyboardFragmentCallback.disableAllButtons()
                 Toast.makeText(this, "You lose!", Toast.LENGTH_LONG).show()
                 hangmanCallback.displayAnswerOnLose(wordViewModel.currentWordText)
@@ -75,15 +76,17 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
     }
 
     override fun hintPressedNumber(number: Int) {
-        if ( wordViewModel.currentUserMistakeCount== 8) {
+        wordViewModel.numberOfTimesHintPressed = number
+
+        if (wordViewModel.currentUserMistakeCount == 8) {
             Toast.makeText(this, "Hint not available", Toast.LENGTH_LONG).show()
         } else {
             if (number == 1) {
                 hangmanCallback.displayHint(wordViewModel.currentWordHint)
             } else if (number == 2) {
-                var str:String=""
-                var counter:Int=(26-wordViewModel.currentLetterClickedSequence.length)/2
-                for(i in 'A'.toInt()..'Z'.toInt()) {
+                var str:String = ""
+                var counter:Int = (26 - wordViewModel.currentLetterClickedSequence.length)/2
+                for(i in 'A'.code..'Z'.code) {
                     if (counter == 0)
                         break
                     if (!wordViewModel.currentWordText.contains(i.toChar())) {
@@ -92,15 +95,14 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
 
                     }
                 }
-                wordViewModel.currentLetterClickedSequence+=str
+                wordViewModel.currentLetterClickedSequence += str
                 keyboardFragmentCallback.setButtonsBeingClicked(str)
             } else if (number == 3) {
                 // TODO Display all the vowels in the word and disable all vowels
-                var str="AEIOU"
-                for(i in 0 until str.length)
-                {
+                val str="AEIOU"
+                for(i in str.indices) {
                     if(wordViewModel.currentWordText.contains(str[i])) {
-                        var res=getCharacterPosition(str[i],wordViewModel.currentWordText)
+                        val res = getCharacterPosition(str[i],wordViewModel.currentWordText)
                         for(ele in res)
                             hangmanCallback.setCorrectCharacterAt(ele,str[i])
                     }
@@ -108,7 +110,8 @@ class MainActivity : AppCompatActivity(), ActivityCallback {
                 wordViewModel.currentWordDisplay=hangmanCallback.getCurrentResultText()
                 wordViewModel.currentLetterClickedSequence+=str
                 keyboardFragmentCallback.setButtonsBeingClicked(str)
-
+            } else {
+                Toast.makeText(this, "Hint not available", Toast.LENGTH_LONG).show()
             }
         }
     }

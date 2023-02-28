@@ -8,6 +8,7 @@ const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 const val CURRENT_ERROR = "CURRENT_ERROR"
 const val CURRENT_WORD_DISPLAY = "CURRENT_WORD_DISPLAY"
 const val CURRENT_LETTER_CLICKED = "CURRENT_LETTER_CLICKED"
+const val NUMBER_OF_TIMES_HINTS_PRESSED = "NUMBER_OF_TIMES_HINTS_PRESSED"
 
 class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
@@ -32,6 +33,10 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
      var currentUserMistakeCount: Int
         get() = savedStateHandle.get<Int>(CURRENT_ERROR) ?: 0
         set(value) = savedStateHandle.set(CURRENT_ERROR, value)
+
+    var numberOfTimesHintPressed: Int
+        get() = savedStateHandle.get<Int>(NUMBER_OF_TIMES_HINTS_PRESSED) ?: 0
+        set(value) = savedStateHandle.set(NUMBER_OF_TIMES_HINTS_PRESSED, value)
 
     var currentWordDisplay: String
         get() = savedStateHandle.get<String>(CURRENT_WORD_DISPLAY) ?: initWordDisplay()
@@ -70,13 +75,11 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
     fun clearSavedState() {
         Log.d("Clear Word View Model", "Clearing saved states in word view model")
         savedStateHandle.remove<Int>(CURRENT_INDEX_KEY)
-//        savedStateHandle.remove<Int>(CURRENT_ERROR)
-//        savedStateHandle.set(CURRENT_ERROR, 0)
-//        currentUserMistakeCount = savedStateHandle[CURRENT_ERROR]!!
         currentUserMistakeCount = 0
+        numberOfTimesHintPressed = 0
         Log.d("Current Error after resetting in WordViewModel", currentUserMistakeCount.toString())
-//        savedStateHandle.remove<String>(CURRENT_LETTER_CLICKED)
+        Log.d("Number of times hint pressed after resetting in WordViewModel", numberOfTimesHintPressed.toString())
         savedStateHandle.remove<String>(CURRENT_WORD_DISPLAY)
-        currentLetterClickedSequence=""
+        currentLetterClickedSequence = ""
     }
 }
