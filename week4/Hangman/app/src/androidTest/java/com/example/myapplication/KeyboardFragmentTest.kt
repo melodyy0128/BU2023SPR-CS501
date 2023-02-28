@@ -2,6 +2,8 @@ package com.example.myapplication
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -20,10 +22,16 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class KeyboardFragmentTest {
 
-    var scenario = launchFragmentInContainer<KeyboardFragment>()
+//    var scenario = launchFragmentInContainer<KeyboardFragment>()
+    private lateinit var scenario: ActivityScenario<MainActivity>
     @Before
     fun setUp() {
-        scenario = launchFragmentInContainer<KeyboardFragment>()
+//        scenario = launchFragmentInContainer<KeyboardFragment>()
+//        scenario = launch(KeyboardFragment::class.java)
+//            .onActivity { it.setFragment(AddNoteFragment()) }
+//        ActivityScenario.launch(KeyboardFragment::class.java)
+//        ActivityScenario.launch(MainActivity::class.java)
+        scenario = launch(MainActivity::class.java)
     }
 
     @After

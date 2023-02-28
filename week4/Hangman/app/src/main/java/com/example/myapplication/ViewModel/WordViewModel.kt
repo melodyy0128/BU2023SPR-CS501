@@ -61,8 +61,8 @@ class WordViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
 
     private fun initWordDisplay(): String {
         var wordDisplay = ""
-        Log.d("init Word index", currentIndex.toString())
-        Log.d("Word View Model initWordDisplay", currentWordText)
+//        Log.d("init Word index", currentIndex.toString())
+//        Log.d("Word View Model initWordDisplay", currentWordText)
         for (i in currentWordText.indices) {
             wordDisplay += "_ "
         }

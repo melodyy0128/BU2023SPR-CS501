@@ -47,7 +47,7 @@ class HangmanFragment : Fragment(), HangmanCallback {
     }
 
     override fun updateImage(kill: Int) {
-        Log.d(this.tag,"update images $kill")
+//        Log.d(this.tag,"update images $kill")
         val hangmanImage = binding.hangmanImage
         when (kill) {
             0 -> hangmanImage.setImageResource(R.drawable.h0)
