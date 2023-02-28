@@ -1,16 +1,16 @@
-package com.example.myapplication
+package com.example.hangman
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
-import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.hangman.databinding.ActivityMainBinding
 import androidx.activity.viewModels
-import com.example.myapplication.Interfaces.ActivityCallback
-import com.example.myapplication.Interfaces.HangmanCallback
-import com.example.myapplication.Interfaces.KeyboardFragmentCallback
-import com.example.myapplication.ViewModel.WordViewModel
+import com.example.hangman.Interfaces.ActivityCallback
+import com.example.hangman.Interfaces.HangmanCallback
+import com.example.hangman.Interfaces.KeyboardFragmentCallback
+import com.example.hangman.ViewModel.WordViewModel
 
 class MainActivity : AppCompatActivity(), ActivityCallback {
 

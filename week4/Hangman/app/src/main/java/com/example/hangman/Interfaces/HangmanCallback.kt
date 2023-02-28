@@ -1,4 +1,4 @@
-package com.example.myapplication.Interfaces
+package com.example.hangman.Interfaces
 
 interface HangmanCallback {
     fun updateImage(kill: Int)

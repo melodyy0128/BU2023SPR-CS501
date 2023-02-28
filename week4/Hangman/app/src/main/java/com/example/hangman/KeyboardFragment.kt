@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.hangman
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -11,10 +11,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
 import androidx.core.view.get
-import com.example.myapplication.Interfaces.ActivityCallback
-import com.example.myapplication.Interfaces.KeyboardFragmentCallback
-import com.example.myapplication.ViewModel.KeyboardViewModel
-import com.example.myapplication.databinding.FragmentKeyboardBinding
+import com.example.hangman.Interfaces.ActivityCallback
+import com.example.hangman.Interfaces.KeyboardFragmentCallback
+import com.example.hangman.ViewModel.KeyboardViewModel
+import com.example.hangman.databinding.FragmentKeyboardBinding
 
 class KeyboardFragment : Fragment(),KeyboardFragmentCallback {
 

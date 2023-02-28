@@ -8,14 +8,14 @@
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.myapplication.HangmanFragment"
+        android:name="com.example.hangman.HangmanFragment"
         android:id="@+id/fragment_hangman"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.myapplication.KeyboardFragment"
+        android:name="com.example.hangman.KeyboardFragment"
         android:id="@+id/fragment_keyboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"

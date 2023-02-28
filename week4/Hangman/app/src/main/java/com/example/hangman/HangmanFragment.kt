@@ -1,6 +1,5 @@
-package com.example.myapplication
+package com.example.hangman
 
-import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,12 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import com.example.myapplication.Interfaces.ActivityCallback
-import com.example.myapplication.Interfaces.HangmanCallback
-import com.example.myapplication.ViewModel.HangmanViewModel
-import com.example.myapplication.databinding.FragmentHangmanBinding
+import com.example.hangman.Interfaces.ActivityCallback
+import com.example.hangman.Interfaces.HangmanCallback
+import com.example.hangman.ViewModel.HangmanViewModel
+import com.example.hangman.databinding.FragmentHangmanBinding
 import kotlin.math.ceil
 
 class HangmanFragment : Fragment(), HangmanCallback {

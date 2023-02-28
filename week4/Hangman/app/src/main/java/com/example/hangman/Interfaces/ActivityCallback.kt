@@ -1,4 +1,4 @@
-package com.example.myapplication.Interfaces
+package com.example.hangman.Interfaces
 
 interface ActivityCallback {
     fun sendCharMessage(data: String)

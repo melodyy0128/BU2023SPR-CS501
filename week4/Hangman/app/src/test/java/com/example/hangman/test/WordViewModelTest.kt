@@ -1,8 +1,8 @@
-package com.example.myapplication.test
+package com.example.hangman.test
 
 import androidx.lifecycle.SavedStateHandle
-import com.example.myapplication.ViewModel.CURRENT_INDEX_KEY
-import com.example.myapplication.ViewModel.WordViewModel
+import com.example.hangman.ViewModel.CURRENT_INDEX_KEY
+import com.example.hangman.ViewModel.WordViewModel
 import org.junit.Assert.*
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.hangman
 
 import android.support.test.uiautomator.UiDevice
 import androidx.test.core.app.ActivityScenario

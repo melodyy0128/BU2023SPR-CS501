@@ -1,9 +1,4 @@
-package com.example.myapplication.test
-
-import com.example.myapplication.HangmanFragment
-import com.example.myapplication.ViewModel.HangmanViewModel
-import org.junit.Assert.*
-import org.junit.Test
+package com.example.hangman.test
 
 class HangmanFragmentTest() {
 //    @Test
