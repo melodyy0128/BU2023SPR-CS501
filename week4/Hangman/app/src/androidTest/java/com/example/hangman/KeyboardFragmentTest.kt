@@ -33,10 +33,11 @@ class KeyboardFragmentTest {
     }
 
     @Test
-    fun buttonDisabled() {
-        onView(withId(R.id.n)).check(matches(isEnabled()))
-        onView(withId(R.id.n)).perform(click())
-        onView(withId(R.id.n)).check(matches(not(isEnabled())))
+    fun buttonDisabledOnClick() {
+        device.setOrientationNatural()
+        onView(withId(R.id.a)).check(matches(isEnabled()))
+        onView(withId(R.id.a)).perform(click())
+        onView(withId(R.id.a)).check(matches(not(isEnabled())))
     }
 
     @Test
